@@ -1655,6 +1655,59 @@ body[data-awake="true"] .hint-awake {
   }
 }
 
+/* --- Orbiting skill badges --- */
+.orbit-track {
+  position: absolute;
+  inset: 0;
+  animation: orbit-spin 16s linear infinite;
+}
+
+.orbit-chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max-content;
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--angle))
+    translateX(var(--orbit-radius, 250px))
+    rotate(calc(-1 * var(--angle)));
+}
+
+.chip-one   { --angle: 0deg; }
+.chip-two   { --angle: 120deg; }
+.chip-three { --angle: 240deg; }
+
+.orbit-chip i {
+  display: inline-block;
+  font-style: normal;
+  animation: orbit-counter-spin 16s linear infinite;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes orbit-counter-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* Pause on hover so the labels are easy to read */
+.portrait-column:hover .orbit-track,
+.portrait-column:hover .orbit-chip i {
+  animation-play-state: paused;
+}
+
+/* Respect users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-track,
+  .orbit-chip i {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
