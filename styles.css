@@ -1664,146 +1664,456 @@ body[data-awake="true"] .hint-awake {
 }
 
 
-/* =========================================================
-   FINAL PORTRAIT + SKILLS ORBIT OVERRIDE
-   - Center image remains a clean circle
-   - Skills/orbit are never clipped
-   - No border around the photo
-   - Empty area uses the portfolio background color
-   ========================================================= */
+/* ==========================================================
+   FINAL PORTRAIT + 6 SKILL ORBIT
+   Target: large circular skill layout around the portrait
+   ========================================================== */
 
 .portrait-column {
-  overflow: visible !important;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: visible;
 }
 
+/* Overall canvas for portrait + orbit */
 .portrait-button {
-  position: relative !important;
-  z-index: 3 !important;
+  --rx: 0deg;
+  --ry: 0deg;
 
-  width: min(100%, 510px) !important;
-  aspect-ratio: 1 / 1 !important;
+  position: relative;
+  z-index: 3;
 
-  overflow: visible !important;
-  isolation: isolate;
+  width: min(100%, 620px);
+  aspect-ratio: 1 / 1;
 
-  border: none !important;
-  border-radius: 0 !important;
-  background: transparent !important;
+  display: block;
+  padding: 0;
+
+  overflow: visible;
+
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+
+  cursor: default;
+  transform: none;
 }
 
-/* The circular area contains ONLY the profile photo.
-   It does not clip the skills around it. */
+/* Center profile photo only */
 .portrait-frame {
-  position: absolute !important;
+  position: absolute;
+  inset: 29%;
 
-  /* Smaller than the full orbit so all skills have space */
-  inset: 22% !important;
+  display: block;
+  overflow: hidden;
 
-  display: block !important;
-  overflow: hidden !important;
+  border: 1px solid rgba(118, 214, 242, 0.85);
+  border-radius: 50%;
 
-  border: none !important;
-  outline: none !important;
-  border-radius: 50% !important;
+  /* Matches the portfolio when the image does not fill every pixel */
+  background: var(--bg);
 
-  /* Matches the site's base background */
-  background: var(--bg) !important;
+  box-shadow:
+    0 0 0 1px rgba(169, 240, 95, 0.18),
+    0 0 34px rgba(50, 199, 243, 0.20),
+    0 0 44px rgba(169, 240, 95, 0.12);
 
-  box-shadow: none !important;
-  z-index: 2 !important;
+  z-index: 5;
 }
 
 .portrait-frame::before,
 .portrait-frame::after {
-  content: none !important;
-  display: none !important;
+  content: none;
+  display: none;
 }
 
-/* Keep the whole image visible inside the circular frame.
-   object-fit: contain prevents the photo from being zoomed/cut. */
 .portrait-frame img {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
+  display: block;
 
-  display: block !important;
+  object-fit: cover;
+  object-position: center center;
 
-  object-fit: contain !important;
-  object-position: center center !important;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
 
-  border: none !important;
-  outline: none !important;
-  border-radius: 0 !important;
-
-  background: transparent !important;
-  box-shadow: none !important;
-
-  filter: none !important;
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
+  background: transparent;
+  filter: none;
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
-/* Do not let interaction states change the image */
 body[data-awake="false"] .portrait-frame img,
 body[data-awake="true"] .portrait-frame img,
 .portrait-button.is-switching img,
 .portrait-button.is-blinking img {
-  filter: none !important;
-  opacity: 1 !important;
-  transform: none !important;
+  filter: none;
+  opacity: 1;
+  transform: none;
 }
 
-/* Hide the old glow so only the clean circular image remains */
+/* Soft ambient halo only */
 .portrait-glow {
-  display: none !important;
+  position: absolute;
+  inset: 20%;
+  display: block;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(50, 199, 243, 0.18), transparent 64%),
+    radial-gradient(circle at 70% 75%, rgba(169, 240, 95, 0.12), transparent 48%);
+  filter: blur(24px);
+  opacity: 0.75;
+  animation: none;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Keep the complete skills system outside the photo and visible */
+/* ==========================================================
+   ORBIT SYSTEM
+   Place .portrait-orbit as a sibling of .portrait-button
+   inside .portrait-column.
+   ========================================================== */
+
 .portrait-orbit {
-  position: absolute !important;
+  position: absolute;
+  z-index: 8;
 
-  /* Orbit is larger than the portrait */
-  inset: -8% !important;
+  width: min(112%, 700px);
+  aspect-ratio: 1 / 1;
 
-  overflow: visible !important;
-  pointer-events: none !important;
-  z-index: 4 !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  overflow: visible;
+  pointer-events: none;
 }
 
-/* Orbit lines stay behind the skill cards */
+/* Main dotted technology orbit */
 .orbit {
-  z-index: 1 !important;
+  position: absolute;
+  inset: 13%;
+
+  border: 2px dashed rgba(67, 188, 246, 0.72);
+  border-radius: 50%;
+
+  transform: none;
+  animation: none;
+  opacity: 0.95;
 }
 
-/* Every skill card stays above the image and is never clipped */
+/* Inner subtle circle */
+.orbit-two {
+  inset: 26%;
+  border: 1px solid rgba(72, 185, 219, 0.20);
+  border-radius: 50%;
+  transform: none;
+  animation: none;
+}
+
+/* Outer subtle ring */
+.orbit-three {
+  inset: 5%;
+  border: 1px solid rgba(93, 166, 199, 0.08);
+  border-radius: 50%;
+  transform: none;
+  animation: none;
+}
+
+/* ==========================================================
+   SKILL CARDS
+   ========================================================== */
+
 .orbit-chip {
-  z-index: 6 !important;
+  --chip-color: var(--azure);
+
+  position: absolute;
+  z-index: 10;
+
+  width: clamp(185px, 28vw, 300px);
+  min-height: 96px;
+
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  padding: 18px 24px;
+
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--chip-color) 72%, rgba(255,255,255,0.12));
+  border-radius: 999px;
+
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--chip-color) 7%, transparent), transparent 52%),
+    rgba(5, 16, 29, 0.92);
+
+  box-shadow:
+    0 12px 38px rgba(0, 0, 0, 0.34),
+    0 0 24px color-mix(in srgb, var(--chip-color) 16%, transparent);
+
+  font: inherit;
+  letter-spacing: normal;
+
+  pointer-events: auto;
+  animation: none;
 }
 
-/* Responsive sizing */
-@media (max-width: 820px) {
-  .portrait-button {
-    width: min(86vw, 440px) !important;
-  }
+/* Icon area */
+.orbit-chip .skill-icon {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
 
-  .portrait-frame {
-    inset: 22% !important;
+  display: grid;
+  place-items: center;
+
+  color: var(--chip-color);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.orbit-chip .skill-icon img,
+.orbit-chip .skill-icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Text area */
+.orbit-chip .skill-copy {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.orbit-chip strong {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.orbit-chip small {
+  display: block;
+  color: #aebccc;
+  font-size: clamp(0.68rem, 1vw, 0.84rem);
+  line-height: 1.35;
+}
+
+/* ==========================================================
+   SIX POSITIONS AROUND THE CIRCLE
+   ========================================================== */
+
+.chip-one {
+  --chip-color: #57e88a;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.chip-two {
+  --chip-color: #a879ff;
+  top: 19%;
+  right: -7%;
+}
+
+.chip-three {
+  --chip-color: #ff8b2b;
+  right: -7%;
+  bottom: 19%;
+}
+
+.chip-four {
+  --chip-color: #f4d84f;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.chip-five {
+  --chip-color: #54df99;
+  bottom: 19%;
+  left: -7%;
+}
+
+.chip-six {
+  --chip-color: #39c9f3;
+  top: 19%;
+  left: -7%;
+}
+
+/* Connector dots */
+.orbit-chip::before {
+  content: "";
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+  background: var(--chip-color);
+
+  box-shadow: 0 0 16px var(--chip-color);
+}
+
+/* top */
+.chip-one::before {
+  left: 50%;
+  top: -21px;
+  transform: translateX(-50%);
+}
+
+/* right upper */
+.chip-two::before {
+  left: 18%;
+  top: -25px;
+}
+
+/* right lower */
+.chip-three::before {
+  left: 18%;
+  bottom: -25px;
+}
+
+/* bottom */
+.chip-four::before {
+  left: 50%;
+  bottom: -21px;
+  transform: translateX(-50%);
+}
+
+/* left lower */
+.chip-five::before {
+  right: 18%;
+  bottom: -25px;
+}
+
+/* left upper */
+.chip-six::before {
+  right: 18%;
+  top: -25px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 900px) {
+  .portrait-button {
+    width: min(90vw, 560px);
   }
 
   .portrait-orbit {
-    width: min(94vw, 490px) !important;
-    aspect-ratio: 1 / 1 !important;
-    inset: 50% auto auto 50% !important;
-    transform: translate(-50%, -50%) !important;
+    width: min(98vw, 620px);
+  }
+
+  .orbit-chip {
+    width: clamp(155px, 26vw, 230px);
+    min-height: 80px;
+    gap: 14px;
+    padding: 14px 17px;
+  }
+
+  .orbit-chip .skill-icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    font-size: 1.6rem;
+  }
+
+  .chip-two,
+  .chip-three {
+    right: -2%;
+  }
+
+  .chip-five,
+  .chip-six {
+    left: -2%;
   }
 }
 
-@media (max-width: 590px) {
+@media (max-width: 650px) {
   .portrait-button {
-    width: min(92vw, 385px) !important;
+    width: min(92vw, 430px);
+  }
+
+  .portrait-orbit {
+    width: min(100vw, 480px);
   }
 
   .portrait-frame {
-    inset: 21% !important;
+    inset: 30%;
+  }
+
+  .orbit {
+    inset: 15%;
+  }
+
+  .orbit-two {
+    inset: 28%;
+  }
+
+  .orbit-chip {
+    width: 135px;
+    min-height: 64px;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .orbit-chip .skill-icon {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    font-size: 1.25rem;
+  }
+
+  .orbit-chip strong {
+    font-size: 0.76rem;
+  }
+
+  .orbit-chip small {
+    font-size: 0.56rem;
+  }
+
+  .chip-two,
+  .chip-three {
+    right: -5%;
+  }
+
+  .chip-five,
+  .chip-six {
+    left: -5%;
+  }
+}
+
+@media (max-width: 470px) {
+  .portrait-button {
+    width: min(94vw, 390px);
+  }
+
+  .portrait-orbit {
+    width: min(110vw, 430px);
+  }
+
+  .orbit-chip {
+    width: 112px;
+    min-height: 54px;
+    padding: 8px 9px;
+    gap: 7px;
+  }
+
+  .orbit-chip .skill-icon {
+    width: 25px;
+    height: 25px;
+    flex-basis: 25px;
+  }
+
+  .orbit-chip small {
+    display: none;
   }
 }
