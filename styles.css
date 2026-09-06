@@ -445,8 +445,8 @@ h2 span {
   padding: 0;
   cursor: pointer;
   border: 0;
-  border-radius: 0;
-background: none;
+  border-radius: 50%;
+  background: none;
   transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
   transition: transform 220ms ease;
 }
@@ -458,47 +458,36 @@ background: none;
 
 .portrait-frame {
   position: absolute;
-  inset: 0;
-
+  inset: 5.5%;
+  overflow: hidden;
   display: block;
-  overflow: visible;
-
-  /* No circle, border, ring, glow, or background */
   border: none;
   outline: none;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  border-radius: 50%;
+  background: #dfe3ea;
+
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.46);
 }
 
 .portrait-frame img {
   width: 100%;
   height: 100%;
-
   display: block;
-
-  /* Show the original image naturally */
-  object-fit: contain;
-  object-position: center center;
-
+  object-fit: cover;
   border: none;
   outline: none;
-  border-radius: 0;
+  border-radius: 50%;
+  transform: scale(1.015);
 
-  background: transparent;
-  box-shadow: none;
-
-  filter: none;
-  opacity: 1;
-  transform: none;
-
-  transition: none;
+  transition:
+    opacity 110ms ease,
+    filter 420ms ease,
+    transform 700ms cubic-bezier(.2, .8, .2, 1);
 }
 
 body[data-awake="false"] .portrait-frame img {
-  filter: none;
-  opacity: 1;
-  transform: none;
+  filter: saturate(0.78) brightness(0.9);
+  transform: scale(1.03);
 }
 
 .portrait-button.is-switching img {
@@ -1671,5 +1660,150 @@ body[data-awake="true"] .hint-awake {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL PORTRAIT + SKILLS ORBIT OVERRIDE
+   - Center image remains a clean circle
+   - Skills/orbit are never clipped
+   - No border around the photo
+   - Empty area uses the portfolio background color
+   ========================================================= */
+
+.portrait-column {
+  overflow: visible !important;
+}
+
+.portrait-button {
+  position: relative !important;
+  z-index: 3 !important;
+
+  width: min(100%, 510px) !important;
+  aspect-ratio: 1 / 1 !important;
+
+  overflow: visible !important;
+  isolation: isolate;
+
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+/* The circular area contains ONLY the profile photo.
+   It does not clip the skills around it. */
+.portrait-frame {
+  position: absolute !important;
+
+  /* Smaller than the full orbit so all skills have space */
+  inset: 22% !important;
+
+  display: block !important;
+  overflow: hidden !important;
+
+  border: none !important;
+  outline: none !important;
+  border-radius: 50% !important;
+
+  /* Matches the site's base background */
+  background: var(--bg) !important;
+
+  box-shadow: none !important;
+  z-index: 2 !important;
+}
+
+.portrait-frame::before,
+.portrait-frame::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Keep the whole image visible inside the circular frame.
+   object-fit: contain prevents the photo from being zoomed/cut. */
+.portrait-frame img {
+  width: 100% !important;
+  height: 100% !important;
+
+  display: block !important;
+
+  object-fit: contain !important;
+  object-position: center center !important;
+
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Do not let interaction states change the image */
+body[data-awake="false"] .portrait-frame img,
+body[data-awake="true"] .portrait-frame img,
+.portrait-button.is-switching img,
+.portrait-button.is-blinking img {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Hide the old glow so only the clean circular image remains */
+.portrait-glow {
+  display: none !important;
+}
+
+/* Keep the complete skills system outside the photo and visible */
+.portrait-orbit {
+  position: absolute !important;
+
+  /* Orbit is larger than the portrait */
+  inset: -8% !important;
+
+  overflow: visible !important;
+  pointer-events: none !important;
+  z-index: 4 !important;
+}
+
+/* Orbit lines stay behind the skill cards */
+.orbit {
+  z-index: 1 !important;
+}
+
+/* Every skill card stays above the image and is never clipped */
+.orbit-chip {
+  z-index: 6 !important;
+}
+
+/* Responsive sizing */
+@media (max-width: 820px) {
+  .portrait-button {
+    width: min(86vw, 440px) !important;
+  }
+
+  .portrait-frame {
+    inset: 22% !important;
+  }
+
+  .portrait-orbit {
+    width: min(94vw, 490px) !important;
+    aspect-ratio: 1 / 1 !important;
+    inset: 50% auto auto 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+@media (max-width: 590px) {
+  .portrait-button {
+    width: min(92vw, 385px) !important;
+  }
+
+  .portrait-frame {
+    inset: 21% !important;
   }
 }
