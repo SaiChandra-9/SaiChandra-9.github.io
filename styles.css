@@ -439,7 +439,7 @@ h2 span {
   --ry: 0deg;
   position: relative;
   z-index: 3;
-  width: min(100%, 510px);
+  width: min(100%, 720px) !important;
   aspect-ratio: 1;
   display: block;
   padding: 0;
@@ -458,7 +458,7 @@ h2 span {
 
 .portrait-frame {
   position: absolute;
-  inset: 5.5%;
+   inset: 25% !important;
   overflow: hidden;
   display: block;
   border: none;
@@ -576,6 +576,7 @@ body[data-awake="true"] .hint-awake {
   inset: -7%;
   pointer-events: none;
   transform-style: preserve-3d;
+  width: min(122%, 860px) !important;
 }
 
 .orbit {
