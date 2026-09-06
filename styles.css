@@ -439,7 +439,7 @@ h2 span {
   --ry: 0deg;
   position: relative;
   z-index: 3;
-  width: min(100%, 620px);
+  width: min(100%, 650px);
   aspect-ratio: 1 / 1;
   display: block;
   padding: 0;
@@ -462,38 +462,26 @@ h2 span {
 
 .portrait-frame {
   position: absolute;
-
-  /* Larger portrait with no visible border/ring */
-  inset: 1%;
-
+  inset: 0;
   overflow: hidden;
   display: block;
-
   border: none;
   outline: none;
   border-radius: 50%;
   background: transparent;
-
-  /* Depth without creating a visible edge */
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
 }
 
 .portrait-frame img {
   width: 100%;
   height: 100%;
-
   display: block;
-
   object-fit: cover;
   object-position: center;
-
   border: none;
   outline: none;
   border-radius: 50%;
-
-  /* Zoom image slightly so the portrait looks bigger */
-  transform: scale(1.10);
-
+  transform: scale(1.08);
   transition:
     opacity 110ms ease,
     filter 420ms ease,
