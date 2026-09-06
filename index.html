@@ -1,148 +1,351 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of Thotakura Veera Satya Sai Chandra, Azure Data Engineer." />
-  <title>Veera Satya Sai Chandra | Azure Data Engineer</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shaktiranjan Sahoo — Azure Data Engineer building reliable, production-grade data pipelines.">
+  <meta name="theme-color" content="#07111f">
+  <title>Shaktiranjan Sahoo | Azure Data Engineer</title>
+  <link rel="preload" href="./assets/profile-open.png" as="image">
+  <link rel="preload" href="./assets/profile-closed.png" as="image">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
 </head>
-<body>
-  <div class="noise"></div>
-  <header class="nav">
-    <nav>
-      <a href="#pipeline">Pipeline</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#experience">Experience</a>
-      <a href="#about">About</a>
+<body data-awake="false">
+  <canvas id="data-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="skip-intro" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="Shaktiranjan Sahoo, home">
+        <span class="brand-mark" aria-hidden="true">SS</span>
+        <span>
+          <strong>Shaktiranjan</strong>
+          <small>Azure Data Engineer</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#pipeline">Pipeline</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </div>
+
+      <a class="nav-contact" href="#contact">Let’s connect <span aria-hidden="true">↗</span></a>
     </nav>
-    <a class="nav-cta" href="#contact">Let's connect ↗</a>
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <div class="eyebrow"><span class="status"></span> Available for Azure data engineering opportunities</div>
-      <div class="hero-grid">
-        <div>
-          <p class="kicker">HELLO, DATA WORLD</p>
-          <h1>Hi, I am<br><span>Sai Chandra.</span></h1>
-          <p class="hero-copy">
-            Azure Data Engineer building reliable data pipelines, scalable ETL workflows,
-            and cloud-based data solutions with Azure Data Factory, Databricks, ADLS Gen2,
-            PySpark, SQL, and Azure DevOps.
+    <section class="hero shell" id="home">
+      <div class="hero-copy">
+        <div class="status-pill intro-item">
+          <span class="status-dot" aria-hidden="true"></span>
+          Available for data engineering opportunities
+        </div>
+
+        <div class="sleep-message" aria-live="polite">
+          <span>One small interaction.</span>
+          <strong>Tap the portrait to wake the pipeline.</strong>
+        </div>
+
+        <div class="awake-message">
+          <p class="overline intro-item">Hello, data world.</p>
+          <h1 class="intro-item">Hi, I am<br><span>Shaktiranjan Sahoo.</span></h1>
+          <p class="hero-lede intro-item">
+            Azure Data Engineer building dependable ETL systems, lakehouse platforms,
+            and analytics-ready data products from source to insight.
           </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#pipeline">Explore my pipeline ↓</a>
-            <a class="button ghost" href="#contact">Start a conversation</a>
+          <div class="hero-actions intro-item">
+            <a class="button button-primary" href="#pipeline">Explore my pipeline <span aria-hidden="true">↓</span></a>
+            <a class="button button-ghost" href="mailto:sahooshaktiranjan077@gmail.com">Start a conversation</a>
           </div>
-          <div class="stats">
-            <div><strong>2.9</strong><span>Years of experience</span></div>
-            <div><strong>Azure</strong><span>Cloud ecosystem</span></div>
-            <div><strong>ADF + ADB</strong><span>ETL engineering</span></div>
+          <dl class="hero-stats intro-item" aria-label="Professional highlights">
+            <div><dt>3.5+</dt><dd>Years’ experience</dd></div>
+            <div><dt>Azure</dt><dd>Cloud ecosystem</dd></div>
+            <div><dt>20+ GB</dt><dd>Daily data processing</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="portrait-column">
+        <div class="portrait-orbit" aria-hidden="true">
+          <span class="orbit orbit-one"></span>
+          <span class="orbit orbit-two"></span>
+          <span class="orbit orbit-three"></span>
+          <span class="orbit-chip chip-one">ADF</span>
+          <span class="orbit-chip chip-two">PySpark</span>
+          <span class="orbit-chip chip-three">ADLS</span>
+        </div>
+
+        <button class="portrait-button" id="portrait-button" type="button" aria-describedby="portrait-hint">
+          <span class="portrait-glow" aria-hidden="true"></span>
+          <span class="portrait-frame">
+            <img
+              id="portrait"
+              src="./assets/profile-closed.png"
+              data-closed-src="./assets/profile-closed.png"
+              data-open-src="./assets/profile-open.png"
+              alt="Portrait of Shaktiranjan Sahoo"
+              width="1254"
+              height="1254">
+          </span>
+          <span class="touch-target" aria-hidden="true">
+            <span>Tap</span>
+          </span>
+        </button>
+
+        <p class="portrait-hint" id="portrait-hint">
+          <span class="finger" aria-hidden="true">◎</span>
+          <span class="hint-sleeping">Touch to open my eyes</span>
+          <span class="hint-awake">Pipeline awake · tap to blink</span>
+        </p>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true"><span></span>Scroll to follow the data</div>
+    </section>
+
+    <section class="pipeline-section section shell" id="pipeline">
+      <div class="section-heading reveal">
+        <div>
+          <p class="overline">End-to-end architecture</p>
+          <h2>One continuous journey.<br><span>Source to insight.</span></h2>
+        </div>
+        <p>
+          A production-minded Azure flow that combines batch and streaming ingestion,
+          lakehouse transformation, quality checks, and business-ready serving.
+        </p>
+      </div>
+
+      <div class="pipeline-console reveal">
+        <div class="console-bar">
+          <div class="console-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <strong>LIVE PIPELINE</strong>
+            <span>portfolio-simulation / main</span>
+          </div>
+          <div class="console-clock">
+            <span id="pipeline-event">Listening for source events</span>
+            <span class="pulse-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
           </div>
         </div>
-        <div class="profile-card">
-          <div class="orb orb-one"></div><div class="orb orb-two"></div>
-          <div class="avatar">SC</div>
-          <div class="profile-label">AZURE DATA ENGINEER</div>
-          <p>Transforming raw data into reliable, analytics-ready systems.</p>
-          <div class="signal"><i></i><i></i><i></i><i></i><i></i></div>
+
+        <div class="pipeline-viewport">
+          <div class="pipeline-track" aria-label="Animated end-to-end data pipeline">
+            <article class="pipeline-node source">
+              <span class="node-index">01</span>
+              <span class="node-icon database-icon" aria-hidden="true"></span>
+              <div><small>Sources</small><strong>SQL Server</strong><em>Batch records</em></div>
+            </article>
+            <span class="connector" aria-hidden="true"><i></i><i></i></span>
+
+            <article class="pipeline-node stream">
+              <span class="node-index">02</span>
+              <span class="node-icon stream-icon" aria-hidden="true">K</span>
+              <div><small>Streaming</small><strong>Kafka</strong><em>Live events</em></div>
+            </article>
+            <span class="connector" aria-hidden="true"><i></i><i></i></span>
+
+            <article class="pipeline-node orchestrate">
+              <span class="node-index">03</span>
+              <span class="node-icon factory-icon" aria-hidden="true">↗</span>
+              <div><small>Orchestration</small><strong>Azure Data Factory</strong><em>Triggers + control</em></div>
+            </article>
+            <span class="connector" aria-hidden="true"><i></i><i></i></span>
+
+            <article class="pipeline-node lake">
+              <span class="node-index">04</span>
+              <span class="node-icon lake-icon" aria-hidden="true">≋</span>
+              <div><small>Landing zone</small><strong>ADLS Gen2</strong><em>Raw + Parquet</em></div>
+            </article>
+            <span class="connector" aria-hidden="true"><i></i><i></i></span>
+
+            <article class="pipeline-node compute">
+              <span class="node-index">05</span>
+              <span class="node-icon spark-icon" aria-hidden="true">✦</span>
+              <div><small>Transform</small><strong>Databricks</strong><em>PySpark jobs</em></div>
+            </article>
+            <span class="connector" aria-hidden="true"><i></i><i></i></span>
+
+            <article class="pipeline-node quality">
+              <span class="node-index">06</span>
+              <span class="node-icon delta-icon" aria-hidden="true">Δ</span>
+              <div><small>Lakehouse</small><strong>Delta Lake</strong><em>Bronze → Gold</em></div>
+            </article>
+            <span class="connector" aria-hidden="true"><i></i><i></i></span>
+
+            <article class="pipeline-node serve">
+              <span class="node-index">07</span>
+              <span class="node-icon chart-icon" aria-hidden="true"><b></b><b></b><b></b></span>
+              <div><small>Serve</small><strong>Analytics</strong><em>Trusted insight</em></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="console-footer">
+          <span><i class="ok-dot"></i> Orchestration healthy</span>
+          <span><i class="ok-dot"></i> Quality gates passed</span>
+          <span><i class="ok-dot"></i> Gold tables refreshed</span>
         </div>
       </div>
     </section>
 
-    <section class="section pipeline" id="pipeline">
-      <p class="kicker">END-TO-END DATA FLOW</p>
-      <h2>One continuous journey.<br><span>Source to insight.</span></h2>
-      <p class="section-intro">A production-focused Azure workflow centered on ingestion, transformation, validation, orchestration, deployment, and reliable data delivery.</p>
-
-      <div class="pipeline-shell">
-        <div class="pipeline-live"><span class="pulse"></span> DATA PIPELINE <code>portfolio / main</code></div>
-        <div class="pipeline-track">
-          <article><b>01</b><h3>Sources</h3><p>Business & operational data</p></article>
-          <article><b>02</b><h3>Orchestration</h3><p>Azure Data Factory</p></article>
-          <article><b>03</b><h3>Landing zone</h3><p>ADLS Gen2 / Storage</p></article>
-          <article><b>04</b><h3>Transform</h3><p>Databricks + PySpark</p></article>
-          <article><b>05</b><h3>Validate</h3><p>Data quality routines</p></article>
-          <article><b>06</b><h3>Deploy</h3><p>GitHub + Azure DevOps</p></article>
-          <article><b>07</b><h3>Serve</h3><p>Analytics-ready data</p></article>
-        </div>
-        <div class="pipeline-health"><span>● Orchestration ready</span><span>● Quality checks</span><span>● Deployment workflow</span></div>
-      </div>
-    </section>
-
-    <section class="section expertise" id="expertise">
-      <p class="kicker">ENGINEERING TOOLKIT</p>
-      <h2>Built for the real world<br><span>of production data.</span></h2>
-      <div class="cards">
-        <article class="skill-card"><span>01</span><h3>Azure orchestration</h3><p>Building ETL pipelines, integrating triggers and workflows, and supporting dependable data movement.</p><div>Azure Data Factory · Logic Apps · ADLS Gen2</div></article>
-        <article class="skill-card"><span>02</span><h3>Data transformation</h3><p>Implementing transformation logic in Databricks using PySpark and Spark SQL.</p><div>Databricks · PySpark · Spark SQL</div></article>
-        <article class="skill-card"><span>03</span><h3>Data reliability</h3><p>Applying validation and cleansing routines to improve data quality and consistency.</p><div>Data Validation · Cleansing · SQL</div></article>
-        <article class="skill-card"><span>04</span><h3>Delivery discipline</h3><p>Using branching, version control, and CI/CD practices to promote notebooks across environments.</p><div>GitHub · Azure DevOps · GitHub Actions</div></article>
-      </div>
-    </section>
-
-    <section class="section experience" id="experience">
-      <p class="kicker">PROFESSIONAL EXPERIENCE</p>
-      <h2>Engineering data systems<br><span>with a production mindset.</span></h2>
-      <div class="timeline">
-        <article class="job">
-          <div class="job-date">NOV 2023 — PRESENT</div>
+    <section class="section expertise-section" id="expertise">
+      <div class="shell">
+        <div class="section-heading reveal">
           <div>
-            <h3>Tata Consultancy Services</h3>
-            <h4>Azure Data Engineer · Chennai</h4>
-            <ul>
-              <li>Created Azure Databricks notebooks for business-driven data transformations.</li>
-              <li>Developed Azure Data Factory pipelines for efficient ETL ingestion, transformation, and loading.</li>
-              <li>Built Logic Apps for alerts and daily update emails integrated with ADF pipelines.</li>
-              <li>Implemented data validation and cleansing routines to improve reliability.</li>
-              <li>Used GitHub branching and Azure DevOps CI/CD to deploy Databricks notebooks across environments.</li>
-              <li>Worked with Azure Key Vault, Storage Accounts, SQL, JIRA, and cross-functional teams.</li>
-            </ul>
+            <p class="overline">Engineering toolkit</p>
+            <h2>Built for the messy middle<br><span>of real data.</span></h2>
           </div>
+          <p>
+            From ingestion patterns to Spark tuning, I focus on systems that remain
+            observable, reusable, and calm under production load.
+          </p>
+        </div>
+
+        <div class="expertise-grid">
+          <article class="expertise-card reveal">
+            <span class="card-number">01</span>
+            <div class="card-symbol azure-symbol" aria-hidden="true">A</div>
+            <h3>Azure orchestration</h3>
+            <p>Metadata-driven ADF pipelines, reusable linked services, triggers, watermarking, and failure recovery.</p>
+            <ul><li>Azure Data Factory</li><li>ADLS Gen2</li><li>Azure DevOps</li></ul>
+          </article>
+
+          <article class="expertise-card reveal">
+            <span class="card-number">02</span>
+            <div class="card-symbol spark-symbol" aria-hidden="true">✦</div>
+            <h3>Lakehouse engineering</h3>
+            <p>Scalable PySpark transformations with clean layer boundaries, Delta reliability, and practical optimization.</p>
+            <ul><li>Databricks</li><li>PySpark</li><li>Delta Lake</li></ul>
+          </article>
+
+          <article class="expertise-card reveal">
+            <span class="card-number">03</span>
+            <div class="card-symbol flow-symbol" aria-hidden="true">⇢</div>
+            <h3>Data movement</h3>
+            <p>Batch and event-driven ingestion shaped around schema evolution, idempotency, and trusted delivery.</p>
+            <ul><li>SQL Server</li><li>Kafka</li><li>ETL / ELT</li></ul>
+          </article>
+
+          <article class="expertise-card reveal">
+            <span class="card-number">04</span>
+            <div class="card-symbol quality-symbol" aria-hidden="true">✓</div>
+            <h3>Production quality</h3>
+            <p>Validation, monitoring, incremental processing, performance tuning, and CI/CD across environments.</p>
+            <ul><li>Data quality</li><li>Observability</li><li>Performance</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="projects">
+      <div class="section-heading reveal">
+        <div>
+          <p class="overline">Selected work</p>
+          <h2>Platforms that move<br><span>the work forward.</span></h2>
+        </div>
+        <p>Representative engineering work across cloud migration, lakehouse design, and automation.</p>
+      </div>
+
+      <div class="projects-list">
+        <article class="project-card reveal">
+          <div class="project-meta"><span>01</span><small>Cloud migration</small></div>
+          <div class="project-main">
+            <h3>Azure Data Migration Framework</h3>
+            <p>
+              Scalable ADF pipelines moving SQL Server data to ADLS Gen2 with watermark-based
+              incremental loads, parameterized components, Parquet output, and automated schedules.
+            </p>
+          </div>
+          <div class="project-tags"><span>ADF</span><span>ADLS Gen2</span><span>SQL</span><span>Parquet</span></div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-meta"><span>02</span><small>Lakehouse</small></div>
+          <div class="project-main">
+            <h3>Medallion Data Platform</h3>
+            <p>
+              Bronze, Silver, and Gold architecture using Databricks, Delta Lake, and PySpark
+              to improve data quality, incremental processing, and analytics performance.
+            </p>
+          </div>
+          <div class="project-tags"><span>Databricks</span><span>Delta Lake</span><span>PySpark</span></div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-meta"><span>03</span><small>Automation</small></div>
+          <div class="project-main">
+            <h3>DO-178B Traceability Tool</h3>
+            <p>
+              Python-based workflow automation for aerospace requirement traceability,
+              validation, and structured compliance report generation.
+            </p>
+          </div>
+          <div class="project-tags"><span>Python</span><span>Validation</span><span>Compliance</span></div>
         </article>
       </div>
     </section>
 
-    <section class="section focus" id="work">
-      <p class="kicker">WHAT I WORK WITH</p>
-      <h2>Capabilities that move<br><span>data work forward.</span></h2>
-      <div class="work-grid">
-        <article><b>01</b><h3>ETL & orchestration</h3><p>Pipeline development for data ingestion, transformation, loading, alerting, and operational workflows.</p><span>ADF · Logic Apps · ETL</span></article>
-        <article><b>02</b><h3>Databricks engineering</h3><p>Notebook-based transformation workflows using PySpark and Spark SQL for scalable data processing.</p><span>Databricks · PySpark · Spark SQL</span></article>
-        <article><b>03</b><h3>Cloud data operations</h3><p>Secure and reliable Azure data services supported by storage, secrets management, monitoring, and deployment practices.</p><span>ADLS · Key Vault · Azure DevOps</span></article>
-      </div>
-    </section>
+    <section class="section about-section" id="about">
+      <div class="shell about-grid">
+        <div class="about-visual reveal" aria-hidden="true">
+          <div class="layer-stack">
+            <span class="layer layer-gold"><i>03</i><strong>GOLD</strong><small>Business-ready</small></span>
+            <span class="layer layer-silver"><i>02</i><strong>SILVER</strong><small>Validated</small></span>
+            <span class="layer layer-bronze"><i>01</i><strong>BRONZE</strong><small>Ingested</small></span>
+          </div>
+        </div>
 
-    <section class="section about" id="about">
-      <div>
-        <p class="kicker">ABOUT ME</p>
-        <h2>I turn data movement<br><span>into dependable systems.</span></h2>
-      </div>
-      <div class="about-copy">
-        <p>I am an Azure Data Engineer with 2.9 years of experience designing, building, and maintaining data pipelines in the Azure ecosystem.</p>
-        <p>My work spans Azure Data Factory, Databricks, ADLS Gen2, Logic Apps, PySpark, Spark SQL, SQL, data quality, and CI/CD practices.</p>
-        <div class="education">
-          <div><small>2019 — 2023</small><strong>B.Tech · Computer Science Engineering</strong><span>CGPA 9.0</span></div>
-          <div><small>CERTIFICATIONS</small><strong>Databricks Data Engineer Associate</strong><strong>DP-900 Azure Data Fundamentals</strong></div>
+        <div class="about-copy reveal">
+          <p class="overline">About me</p>
+          <h2>I turn raw movement<br><span>into reliable meaning.</span></h2>
+          <p>
+            I’m an Azure Data Engineer with 3.5+ years of experience designing
+            end-to-end data workflows. My work spans orchestration, cloud storage,
+            Spark transformation, SQL, lakehouse architecture, and deployment discipline.
+          </p>
+          <p>
+            I care about the details behind a successful pipeline: restartability,
+            clear ownership, predictable cost, useful monitoring, and data people can trust.
+          </p>
+          <div class="experience-line">
+            <span>2022 — Now</span>
+            <div><strong>Azure Data Engineer</strong><small>ALTEN India · ADE (DRDO)</small></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact">
-      <p class="kicker">LET'S CONNECT</p>
-      <h2>Have a data pipeline in mind?<br><span>Let's make it flow.</span></h2>
-      <div class="contact-links">
-        <a href="mailto:tvssc2442@gmail.com">tvssc2442@gmail.com ↗</a>
-        <a href="https://www.linkedin.com/in/sai-chandra-585689232/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+    <section class="contact-section" id="contact">
+      <div class="shell contact-wrap reveal">
+        <p class="overline">Let’s build something dependable</p>
+        <h2>Have a pipeline in mind?<br><span>Let’s make it flow.</span></h2>
+        <a class="contact-email" href="mailto:sahooshaktiranjan077@gmail.com">
+          sahooshaktiranjan077@gmail.com <span aria-hidden="true">↗</span>
+        </a>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/shaktiranjan-sahoo-93526a209/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/Shakti077" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="tel:+918456859392">+91 84568 59392</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <span>© 2026 Thotakura Veera Satya Sai Chandra</span>
-    <span>Designed around data in motion.</span>
+  <footer class="footer shell">
+    <p>© <span id="year">2026</span> Shaktiranjan Sahoo</p>
+    <p>Designed around data in motion.</p>
   </footer>
-  <script src="/SaiChandra-9.github.io/script.js"></script>
+
+  <noscript>
+    <style>.sleep-message{display:none!important}.awake-message{opacity:1!important;visibility:visible!important}.awake-message .intro-item{opacity:1!important;transform:none!important}</style>
+  </noscript>
 </body>
 </html>
