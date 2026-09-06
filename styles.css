@@ -439,7 +439,7 @@ h2 span {
   --ry: 0deg;
   position: relative;
   z-index: 3;
-  width: min(100%, 720px) !important;
+  width: min(100%, 510px);
   aspect-ratio: 1;
   display: block;
   padding: 0;
@@ -458,15 +458,24 @@ h2 span {
 
 .portrait-frame {
   position: absolute;
-   inset: 25% !important;
+  inset: 5.5%;
   overflow: hidden;
   display: block;
-  border: none;
-  outline: none;
+  border: 1px solid rgba(180, 214, 234, 0.32);
   border-radius: 50%;
   background: #dfe3ea;
+  box-shadow:
+    0 34px 80px rgba(0, 0, 0, 0.46),
+    inset 0 0 0 10px rgba(255, 255, 255, 0.025);
+}
 
-  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.46);
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(50, 199, 243, 0.08), transparent 44%, rgba(169, 240, 95, 0.07));
+  pointer-events: none;
 }
 
 .portrait-frame img {
@@ -474,15 +483,9 @@ h2 span {
   height: 100%;
   display: block;
   object-fit: cover;
-  border: none;
-  outline: none;
-  border-radius: 50%;
+  border-radius: inherit;
   transform: scale(1.015);
-
-  transition:
-    opacity 110ms ease,
-    filter 420ms ease,
-    transform 700ms cubic-bezier(.2, .8, .2, 1);
+  transition: opacity 110ms ease, filter 420ms ease, transform 700ms cubic-bezier(.2,.8,.2,1);
 }
 
 body[data-awake="false"] .portrait-frame img {
@@ -576,7 +579,6 @@ body[data-awake="true"] .hint-awake {
   inset: -7%;
   pointer-events: none;
   transform-style: preserve-3d;
-  width: min(122%, 860px) !important;
 }
 
 .orbit {
@@ -1661,460 +1663,5 @@ body[data-awake="true"] .hint-awake {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-}
-
-
-/* ==========================================================
-   FINAL PORTRAIT + 6 SKILL ORBIT
-   Target: large circular skill layout around the portrait
-   ========================================================== */
-
-.portrait-column {
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: visible;
-}
-
-/* Overall canvas for portrait + orbit */
-.portrait-button {
-  --rx: 0deg;
-  --ry: 0deg;
-
-  position: relative;
-  z-index: 3;
-
-  width: min(100%, 620px);
-  aspect-ratio: 1 / 1;
-
-  display: block;
-  padding: 0;
-
-  overflow: visible;
-
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-
-  cursor: default;
-  transform: none;
-}
-
-/* Center profile photo only */
-.portrait-frame {
-  position: absolute;
-  inset: 29%;
-
-  display: block;
-  overflow: hidden;
-
-  border: 1px solid rgba(118, 214, 242, 0.85);
-  border-radius: 50%;
-
-  /* Matches the portfolio when the image does not fill every pixel */
-  background: var(--bg);
-
-  box-shadow:
-    0 0 0 1px rgba(169, 240, 95, 0.18),
-    0 0 34px rgba(50, 199, 243, 0.20),
-    0 0 44px rgba(169, 240, 95, 0.12);
-
-  z-index: 5;
-}
-
-.portrait-frame::before,
-.portrait-frame::after {
-  content: none;
-  display: none;
-}
-
-.portrait-frame img {
-  width: 100%;
-  height: 100%;
-  display: block;
-
-  object-fit: cover;
-  object-position: center center;
-
-  border: 0;
-  border-radius: 0;
-  outline: 0;
-
-  background: transparent;
-  filter: none;
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
-
-body[data-awake="false"] .portrait-frame img,
-body[data-awake="true"] .portrait-frame img,
-.portrait-button.is-switching img,
-.portrait-button.is-blinking img {
-  filter: none;
-  opacity: 1;
-  transform: none;
-}
-
-/* Soft ambient halo only */
-.portrait-glow {
-  position: absolute;
-  inset: 20%;
-  display: block;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(50, 199, 243, 0.18), transparent 64%),
-    radial-gradient(circle at 70% 75%, rgba(169, 240, 95, 0.12), transparent 48%);
-  filter: blur(24px);
-  opacity: 0.75;
-  animation: none;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ==========================================================
-   ORBIT SYSTEM
-   Place .portrait-orbit as a sibling of .portrait-button
-   inside .portrait-column.
-   ========================================================== */
-
-.portrait-orbit {
-  position: absolute;
-  z-index: 8;
-
-  width: min(112%, 700px);
-  aspect-ratio: 1 / 1;
-
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  overflow: visible;
-  pointer-events: none;
-}
-
-/* Main dotted technology orbit */
-.orbit {
-  position: absolute;
-  inset: 13%;
-
-  border: 2px dashed rgba(67, 188, 246, 0.72);
-  border-radius: 50%;
-
-  transform: none;
-  animation: none;
-  opacity: 0.95;
-}
-
-/* Inner subtle circle */
-.orbit-two {
-  inset: 26%;
-  border: 1px solid rgba(72, 185, 219, 0.20);
-  border-radius: 50%;
-  transform: none;
-  animation: none;
-}
-
-/* Outer subtle ring */
-.orbit-three {
-  inset: 5%;
-  border: 1px solid rgba(93, 166, 199, 0.08);
-  border-radius: 50%;
-  transform: none;
-  animation: none;
-}
-
-/* ==========================================================
-   SKILL CARDS
-   ========================================================== */
-
-.orbit-chip {
-  --chip-color: var(--azure);
-
-  position: absolute;
-  z-index: 10;
-
-  width: clamp(185px, 28vw, 300px);
-  min-height: 96px;
-
-  display: flex;
-  align-items: center;
-  gap: 22px;
-
-  padding: 18px 24px;
-
-  color: var(--ink);
-  border: 1px solid color-mix(in srgb, var(--chip-color) 72%, rgba(255,255,255,0.12));
-  border-radius: 999px;
-
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--chip-color) 7%, transparent), transparent 52%),
-    rgba(5, 16, 29, 0.92);
-
-  box-shadow:
-    0 12px 38px rgba(0, 0, 0, 0.34),
-    0 0 24px color-mix(in srgb, var(--chip-color) 16%, transparent);
-
-  font: inherit;
-  letter-spacing: normal;
-
-  pointer-events: auto;
-  animation: none;
-}
-
-/* Icon area */
-.orbit-chip .skill-icon {
-  width: 54px;
-  height: 54px;
-  flex: 0 0 54px;
-
-  display: grid;
-  place-items: center;
-
-  color: var(--chip-color);
-  font-size: 2rem;
-  font-weight: 900;
-}
-
-.orbit-chip .skill-icon img,
-.orbit-chip .skill-icon svg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Text area */
-.orbit-chip .skill-copy {
-  min-width: 0;
-  display: grid;
-  gap: 6px;
-}
-
-.orbit-chip strong {
-  display: block;
-  color: var(--ink);
-  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
-  line-height: 1.1;
-  font-weight: 800;
-}
-
-.orbit-chip small {
-  display: block;
-  color: #aebccc;
-  font-size: clamp(0.68rem, 1vw, 0.84rem);
-  line-height: 1.35;
-}
-
-/* ==========================================================
-   SIX POSITIONS AROUND THE CIRCLE
-   ========================================================== */
-
-.chip-one {
-  --chip-color: #57e88a;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.chip-two {
-  --chip-color: #a879ff;
-  top: 19%;
-  right: -7%;
-}
-
-.chip-three {
-  --chip-color: #ff8b2b;
-  right: -7%;
-  bottom: 19%;
-}
-
-.chip-four {
-  --chip-color: #f4d84f;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.chip-five {
-  --chip-color: #54df99;
-  bottom: 19%;
-  left: -7%;
-}
-
-.chip-six {
-  --chip-color: #39c9f3;
-  top: 19%;
-  left: -7%;
-}
-
-/* Connector dots */
-.orbit-chip::before {
-  content: "";
-  position: absolute;
-
-  width: 13px;
-  height: 13px;
-
-  border-radius: 50%;
-  background: var(--chip-color);
-
-  box-shadow: 0 0 16px var(--chip-color);
-}
-
-/* top */
-.chip-one::before {
-  left: 50%;
-  top: -21px;
-  transform: translateX(-50%);
-}
-
-/* right upper */
-.chip-two::before {
-  left: 18%;
-  top: -25px;
-}
-
-/* right lower */
-.chip-three::before {
-  left: 18%;
-  bottom: -25px;
-}
-
-/* bottom */
-.chip-four::before {
-  left: 50%;
-  bottom: -21px;
-  transform: translateX(-50%);
-}
-
-/* left lower */
-.chip-five::before {
-  right: 18%;
-  bottom: -25px;
-}
-
-/* left upper */
-.chip-six::before {
-  right: 18%;
-  top: -25px;
-}
-
-/* ==========================================================
-   RESPONSIVE
-   ========================================================== */
-
-@media (max-width: 900px) {
-  .portrait-button {
-    width: min(90vw, 560px);
-  }
-
-  .portrait-orbit {
-    width: min(98vw, 620px);
-  }
-
-  .orbit-chip {
-    width: clamp(155px, 26vw, 230px);
-    min-height: 80px;
-    gap: 14px;
-    padding: 14px 17px;
-  }
-
-  .orbit-chip .skill-icon {
-    width: 42px;
-    height: 42px;
-    flex-basis: 42px;
-    font-size: 1.6rem;
-  }
-
-  .chip-two,
-  .chip-three {
-    right: -2%;
-  }
-
-  .chip-five,
-  .chip-six {
-    left: -2%;
-  }
-}
-
-@media (max-width: 650px) {
-  .portrait-button {
-    width: min(92vw, 430px);
-  }
-
-  .portrait-orbit {
-    width: min(100vw, 480px);
-  }
-
-  .portrait-frame {
-    inset: 30%;
-  }
-
-  .orbit {
-    inset: 15%;
-  }
-
-  .orbit-two {
-    inset: 28%;
-  }
-
-  .orbit-chip {
-    width: 135px;
-    min-height: 64px;
-    gap: 10px;
-    padding: 10px 12px;
-  }
-
-  .orbit-chip .skill-icon {
-    width: 32px;
-    height: 32px;
-    flex-basis: 32px;
-    font-size: 1.25rem;
-  }
-
-  .orbit-chip strong {
-    font-size: 0.76rem;
-  }
-
-  .orbit-chip small {
-    font-size: 0.56rem;
-  }
-
-  .chip-two,
-  .chip-three {
-    right: -5%;
-  }
-
-  .chip-five,
-  .chip-six {
-    left: -5%;
-  }
-}
-
-@media (max-width: 470px) {
-  .portrait-button {
-    width: min(94vw, 390px);
-  }
-
-  .portrait-orbit {
-    width: min(110vw, 430px);
-  }
-
-  .orbit-chip {
-    width: 112px;
-    min-height: 54px;
-    padding: 8px 9px;
-    gap: 7px;
-  }
-
-  .orbit-chip .skill-icon {
-    width: 25px;
-    height: 25px;
-    flex-basis: 25px;
-  }
-
-  .orbit-chip small {
-    display: none;
   }
 }
