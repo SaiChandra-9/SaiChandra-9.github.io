@@ -461,11 +461,21 @@ h2 span {
   inset: 5.5%;
   overflow: hidden;
   display: block;
+  border: 1px solid rgba(180, 214, 234, 0.32);
   border-radius: 50%;
   background: #dfe3ea;
   box-shadow:
     0 34px 80px rgba(0, 0, 0, 0.46),
     inset 0 0 0 10px rgba(255, 255, 255, 0.025);
+}
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(50, 199, 243, 0.08), transparent 44%, rgba(169, 240, 95, 0.07));
+  pointer-events: none;
 }
 
 .portrait-frame img {
