@@ -608,8 +608,6 @@ body[data-awake="true"] .hint-awake {
 
 .orbit-chip {
   position: absolute;
-  top: 50%;
-  left: 50%;
   z-index: 4;
   display: grid;
   place-items: center;
@@ -623,12 +621,11 @@ body[data-awake="true"] .hint-awake {
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
   font: 750 0.62rem/1 ui-monospace, SFMono-Regular, Consolas, monospace;
   letter-spacing: 0.05em;
-  animation: chipOrbit 20s linear infinite;
 }
 
-.chip-one   { --orbit-angle: 0deg; }
-.chip-two   { --orbit-angle: 120deg; animation-delay: -6.667s; }
-.chip-three { --orbit-angle: 240deg; animation-delay: -13.333s; }
+.chip-one { top: 9%; left: 5%; animation: float 5.5s ease-in-out infinite; }
+.chip-two { top: 33%; right: -2%; animation: float 6s ease-in-out -1.7s infinite; }
+.chip-three { bottom: 9%; left: 5%; animation: float 5.2s ease-in-out -3s infinite; }
 
 .hero-scroll {
   position: absolute;
@@ -1331,11 +1328,6 @@ body[data-awake="true"] .hint-awake {
   to { rotate: 1turn; }
 }
 
-@keyframes chipOrbit {
-  from { transform: translate(-50%, -50%) rotate(calc(var(--orbit-angle) + 0deg))   translateX(var(--orbit-radius, 235px)) rotate(calc(-1 * (var(--orbit-angle) + 0deg))); }
-  to   { transform: translate(-50%, -50%) rotate(calc(var(--orbit-angle) + 360deg)) translateX(var(--orbit-radius, 235px)) rotate(calc(-1 * (var(--orbit-angle) + 360deg))); }
-}
-
 @keyframes float {
   50% { transform: translateY(-10px); }
 }
@@ -1498,7 +1490,6 @@ body[data-awake="true"] .hint-awake {
     aspect-ratio: 1;
     inset: 50% auto auto 50%;
     transform: translate(-50%, -50%);
-    --orbit-radius: 195px;
   }
 
   .hero-scroll {
