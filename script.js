@@ -78,7 +78,7 @@
 
   const events = [
     "SQL change detected · watermark advanced",
-    "Kafka events received · micro-batch ready",
+    "SFTP File received · micro-batch ready",
     "ADF trigger fired · dependencies resolved",
     "ADLS landing complete · Parquet validated",
     "PySpark transform running · partitions tuned",
